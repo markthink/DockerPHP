@@ -18,18 +18,17 @@ Docker容器化技术在过去的2015年得到了大面积的普及应用，特�
 - ~/dvwa/htdocs 	项目代码
 - ~/dvwa/log		存放所有输出log
 
-##创建这些目录
-
-```
-mkdir ~/dvwa ~/dvwa/data ~/dvwa/data/mysql ~/dvwa/log ~/dvwa/log/nginx ~/dvwa/log/php ~/dvwa/htdocs
-
-```
-
 ###从代码仓库构建
 
 ```
 cd ~
 git clone https://github.com/MarkThink/DockerPHP.git dvwa
+```
+
+##创建这些目录
+
+```
+mkdir ~/dvwa ~/dvwa/data ~/dvwa/data/mysql ~/dvwa/log ~/dvwa/log/nginx ~/dvwa/log/php ~/dvwa/htdocs
 ```
 
 ##下载镜像及构建
