@@ -1,0 +1,33 @@
+nginx:
+  build: ./nginx
+  ports:
+    - "80:80"
+  links:
+    - "php"
+  volumes:
+    - ~/dvwa:/dvwa
+
+php:
+  build: ./php
+  ports:
+    - "8000:8000"
+    - "9000:9000"
+  links:
+    - "mysql"
+    - "redis"
+  volumes:
+    - ~/dvwa:/dvwa
+
+mysql:
+  build: ./mysql
+  ports:
+    - "3306:3306"
+  volumes:
+    - ~/dvwa/data/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: 123456
+
+redis:
+  build: ./redis
+  ports:
+    - "6379:6379"
