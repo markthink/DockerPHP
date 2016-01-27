@@ -23,7 +23,6 @@ Docker容器化技术在过去的2015年得到了大面积的普及应用，特�
 ```
 mkdir ~/dvwa ~/dvwa/data ~/dvwa/data/mysql ~/dvwa/log ~/dvwa/log/nginx ~/dvwa/log/php ~/dvwa/htdocs
 
-mkdir ~/dvwa/htdocs/Dockerfiles
 ```
 
 ###从代码仓库构建
