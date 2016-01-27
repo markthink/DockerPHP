@@ -34,6 +34,8 @@ mkdir ~/dvwa ~/dvwa/data ~/dvwa/data/mysql ~/dvwa/log ~/dvwa/log/nginx ~/dvwa/lo
 ##下载镜像及构建
 
 ```
+cd ~/dvwa/htdocs/dvawfiles
+make pull
 make dl
 make build
 ```
