@@ -1,0 +1,153 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/created-by: |
+      {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"hz001","name":"dvwa-web-1333362563","uid":"1ec14040-6514-11e6-a557-00163e026acf","apiVersion":"extensions","resourceVersion":"483988"}}
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory limit for container
+      nginx; cpu, memory limit for container php; cpu, memory limit for container
+      mysql'
+  creationTimestamp: 2016-08-18T07:19:37Z
+  generateName: dvwa-web-1333362563-
+  labels:
+    kubernetes-admin.caicloud.io/application: dvwa-web
+    kubernetes-admin.caicloud.io/type: application
+    pod-template-hash: "1333362563"
+  name: dvwa-web-1333362563-87sh6
+  namespace: hz001
+  resourceVersion: "484012"
+  selfLink: /api/v1/namespaces/hz001/pods/dvwa-web-1333362563-87sh6
+  uid: 1ec73395-6514-11e6-a557-00163e026acf
+spec:
+  containers:
+  - image: index.caicloud.io/markthink/dvwa-nginx
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 1Mi
+    securityContext: {}
+    terminationMessagePath: /dev/termination-log
+    volumeMounts:
+    - mountPath: /dvwa/htdocs/dvwa_app
+      name: dvwa-data
+    - mountPath: /etc/nginx/conf.d/
+      name: nginx-web
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-elu9b
+      readOnly: true
+  - image: index.caicloud.io/markthink/dvwa-php
+    imagePullPolicy: Always
+    name: php
+    ports:
+    - containerPort: 8000
+      protocol: TCP
+    - containerPort: 9000
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 1Mi
+    securityContext: {}
+    terminationMessagePath: /dev/termination-log
+    volumeMounts:
+    - mountPath: /dvwa/htdocs/dvwa_app
+      name: dvwa-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-elu9b
+      readOnly: true
+  - env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "123456"
+    image: index.caicloud.io/markthink/dvwa-mysql
+    imagePullPolicy: Always
+    name: mysql
+    ports:
+    - containerPort: 3306
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 1Mi
+    securityContext: {}
+    terminationMessagePath: /dev/termination-log
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: mysql-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-elu9b
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: kubernetes-node-1
+  restartPolicy: Always
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  volumes:
+  - hostPath:
+      path: /root/pod-container/dvwa
+    name: dvwa-data
+  - hostPath:
+      path: /root/pod-container/web
+    name: nginx-web
+  - hostPath:
+      path: /root/pod-container/mysql
+    name: mysql-data
+  - name: default-token-elu9b
+    secret:
+      secretName: default-token-elu9b
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2016-08-18T07:19:42Z
+    status: "True"
+    type: Ready
+  containerStatuses:
+  - containerID: docker://f93906da64c3293a64fd1a32e2db8246876aeec4d1e6821b468d59743038e64b
+    image: index.caicloud.io/markthink/dvwa-mysql
+    imageID: docker://836851f414d588e57f410b88b8fbe80aad377d4915671a8bfab4f1da115f6947
+    lastState: {}
+    name: mysql
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2016-08-18T07:19:42Z
+  - containerID: docker://3b18308b876b3f36b44fb5a1799b0b12dec8ac01c370220bd5efdfc9a7c08275
+    image: index.caicloud.io/markthink/dvwa-nginx
+    imageID: docker://4950a178f408214279c190cfa8071272fc26e9cb7b532cbf5534571d4e7b844c
+    lastState: {}
+    name: nginx
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2016-08-18T07:19:39Z
+  - containerID: docker://4636e30b7aa2726c7e330f042d412e470bf9f1b4e6972a10843a3139c7c6a504
+    image: index.caicloud.io/markthink/dvwa-php
+    imageID: docker://c185de9cc8c9a18be76f33d63872873d82e90cdc3888de15f960d423ff48d121
+    lastState: {}
+    name: php
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2016-08-18T07:19:41Z
+  hostIP: 120.24.248.136
+  phase: Running
+  podIP: 192.168.67.15
+  startTime: 2016-08-18T07:19:37Z

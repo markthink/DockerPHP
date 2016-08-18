@@ -1,0 +1,22 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: dvwa-web
+    namespace: hz001
+    labels:
+      name: dvwa_web
+  spec:
+    clusterIP: 10.254.149.32
+    ports:
+    - name: http
+      nodePort: 30010
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      name: dvwa-web
+    type: NodePort
+kind: List
+metadata: {}

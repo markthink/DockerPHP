@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2016-08-18T07:19:37Z
+  labels:
+    kubernetes-admin.caicloud.io/type: application
+  name: dvwa-web
+  namespace: hz001
+  resourceVersion: "483985"
+  selfLink: /api/v1/namespaces/hz001/services/dvwa-web
+  uid: 1eb26e47-6514-11e6-a557-00163e026acf
+spec:
+  clusterIP: 10.254.216.227
+  ports:
+  - name: http
+    nodePort: 30010
+    port: 8088
+    protocol: TCP
+    targetPort: 80
+  selector:
+    kubernetes-admin.caicloud.io/application: dvwa-web
+    kubernetes-admin.caicloud.io/type: application
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
